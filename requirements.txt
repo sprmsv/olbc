@@ -1,0 +1,12 @@
+einops
+flax
+gmmx
+h5py
+jax[cuda12]
+jraph
+matplotlib
+notebook
+numpy
+optax
+pandas
+seaborn
