@@ -2,7 +2,7 @@ einops
 flax
 gmmx
 h5py
-jax[cuda12]
+jax
 jraph
 matplotlib
 notebook

@@ -595,14 +595,6 @@ def get_operator(model_configs: Mapping[str, Any], dataset: Dataset) -> Abstract
   return model
 
 def main():
-  # Check the available devices
-  process_index = jax.process_index()
-  process_count = jax.process_count()
-  local_devices = jax.local_devices()
-  log(f'JAX host: {process_index} / {process_count}', flush=True)
-  log(f'JAX local devices: {local_devices}', flush=True)
-  # We only support single-host training
-  assert process_count == 1
   # Check the inputs
   if not FLAGS.datetime:
     FLAGS.datetime = datetime.now().strftime('%Y%m%d-%H%M%S')
@@ -770,5 +762,15 @@ def main():
   )
 
 if __name__ == '__main__':
+  # Check the available devices
+  process_index = jax.process_index()
+  process_count = jax.process_count()
+  local_devices = jax.local_devices()
+  log(f'JAX processes: {process_count}', flush=True)
+  log(f'JAX local devices: {local_devices}', flush=True)
+  log(f'JAX host: {process_index}', flush=True)
+  # We only support single-host training
+  assert process_count == 1
+
   FLAGS = define_flags()
   main()
