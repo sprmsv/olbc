@@ -139,7 +139,7 @@ class Attention(nn.Module):
     # Expand mask to multi-head format if provided
     mask = repeat(mask, 'b m -> (b h) n m', h=self.heads, n=sim.shape[1]) if (mask is not None) else None
     # Apply softmax normalization with mask
-    attn = nn.softmax(sim, where=mask, axis=-1)
+    attn = nn.softmax(sim, where=mask.astype(jnp.bool), axis=-1)
     # Compute average attention for intermediate logging
     attn_avg = rearrange(attn, '(b h) i j -> b h i j', h=self.heads).mean(axis=1)
     self.sow(col='intermediates', name='scores', value=attn_avg)

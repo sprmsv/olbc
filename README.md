@@ -6,20 +6,21 @@
 
 <p align="center">
   <img src="assets/compmech.png" height="80"/>
-  <span style="display: inline-block; margin: 0 20px;"></span>
+  &#8194;&#8194;&#8194;&#8194;&#8194;&#8194;
   <img src="assets/camlab.png" height="70"/>
 </p>
 
 
 <p align="center">
+<a href="https://arxiv.org/abs/2602.04923" style="color: inherit; text-decoration: none;"> <img src="assets/arxiv.png" height="16" style="background: white; padding: 4px 10px; mask-image: -webkit-mask-image: radial-gradient(circle, black 0%, black 85%, transparent 100%); border-radius: 20%;" /> </a>
+&#8194;
+<a href="https://doi.org/10.5281/zenodo.18377370" style="color: inherit; text-decoration: none;"> <img src="assets/zenodo.png" height="24" style="mask-image: -webkit-mask-image: radial-gradient(circle, black 0%, black 85%, transparent 100%); border-radius: 20%;" /> </a>
+&#8194;
 Neural operators have emerged as powerful surrogates for the solution of partial differential equations (PDEs), yet their ability to handle general, highly variable boundary conditions (BCs) remains limited. Existing approaches often fail when the solution operator exhibits strong sensitivity to boundary forcings. We propose a general framework for conditioning neural operators on complex non-homogeneous BCs through function extensions. Our key idea is to map boundary data to latent pseudo-extensions defined over the entire spatial domain, enabling any standard operator learning architecture to consume boundary information. The resulting operator, coupled with an arbitrary domain-to-domain neural operator, can learn rich dependencies on complex BCs and input domain functions at the same time. To benchmark this setting, we construct 18 challenging datasets spanning Poisson, linear elasticity, and hyperelasticity problems, with highly variable, mixed-type, component-wise, and multi-segment BCs on diverse geometries. Our approach achieves state-of-the-art accuracy, outperforming baselines by large margins, while requiring no hyperparameter tuning across datasets. Overall, our results demonstrate that learning boundary-to-domain extensions is an effective and practical strategy for imposing complex BCs in existing neural operator frameworks, enabling accurate and robust scientific machine learning models for a broader range of PDE-governed problems.
+
 </p>
 
-<p align="center">
-<a href="https://arxiv.org/abs/2602.04923"> <img src="assets/arxiv.png" height="16" style="background: white; padding: 4px 10px; mask-image: -webkit-mask-image: radial-gradient(circle, black 0%, black 85%, transparent 100%); border-radius: 20%;" /> </a>
-  <span style="display: inline-block; margin: 0 4px;"></span>
-<a href="https://doi.org/10.5281/zenodo.18377370"> <img src="assets/zenodo.png" height="24" style="mask-image: -webkit-mask-image: radial-gradient(circle, black 0%, black 85%, transparent 100%); border-radius: 20%;" /> </a>
-</p>
+
 
 <hr>
 
@@ -35,24 +36,6 @@ The architecture consists of an extender module followed by a standard neural op
   <img src="assets/estimates/circlehollow.gif" width="30%" alt="Circle Hollow Estimates"/>
   <img src="assets/estimates/squarehollow.gif" width="30%" alt="Square Hollow Estimates"/>
 </p>
-
-# Installation
-
-Clone the repository and create a virtual environment:
-
-```bash
-git clone https://github.com/sprmsv/olbc.git
-cd olbc
-python -m venv .venv
-source .venv/bin/activate
-```
-
-Install dependencies:
-
-```bash
-pip install -r requirements.txt
-```
-> In order to use JAX with GPUs/TPUs, a proper option should be given to `jax` in `requirements.txt`. Please check [JAX compatibility](https://jax.readthedocs.io/en/latest/installation.html) in order to find the relative option for your hardware. E.g., for NVIDIA GPUs with CUDA 12, `jax[cuda12]` should be installed.
 
 
 # Datasets
@@ -95,6 +78,33 @@ Each dataset directory contains a `train.nc` file for training and validation, a
 - **`ol.metrics`**: Evaluation metrics
 
 - **`ol.stepping`**: Model wrappers including merging and normalization
+
+- **`ol.train`**: Training script supporting extended RIGNO (XRIGNO) and extended GAOT (XGAOT), merging and normalization of mixed-type boundary conditions, zero extensions (zero padding), harmonic extensions (if available in the dataset), and learned extensions
+
+- **`ol.test`**: Testing and evaluation script
+
+## Installation
+
+Clone the repository and navigate inside it:
+
+```bash
+git clone https://github.com/sprmsv/olbc.git
+cd olbc
+```
+
+Create a virtual environment:
+```bash
+python -m venv .venv
+source .venv/bin/activate
+```
+
+Install dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+> In order to use JAX with GPUs/TPUs, a proper option should be given to `jax` in `requirements.txt`. Please check [JAX compatibility](https://jax.readthedocs.io/en/latest/installation.html) in order to find the relative option for your hardware. E.g., for NVIDIA GPUs with CUDA 12, `jax[cuda12]` should be installed.
+
 
 ## Training
 
